@@ -7,7 +7,7 @@ ROUTE=$3
 
 for (( i=0; i<$USERS; i++ ))
 do
-    curl $ROUTE -c /tmp/cookies$i
+    curl $ROUTE -s -c /tmp/cookies$i
 done
 
 for (( i=0; i<$ITERATIONS; i++ ))

@@ -14,9 +14,6 @@ metadata:
 spec:
   port:
     targetPort: 8000-tcp
-  tls:
-    insecureEdgeTerminationPolicy: Redirect
-    termination: edge
   to:
     kind: Service
     name: basic-api
