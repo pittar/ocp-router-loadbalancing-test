@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: "Router load balancing test."
+    openshift.io/display-name: "Load Test"
+  labels:
+    kubernetes.io/metadata.name: router-loadtest
+  name: router-loadtest
+spec: {}

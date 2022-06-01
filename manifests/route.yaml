@@ -1,0 +1,24 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: basic-api
+    app.kubernetes.io/component: basic-api
+    app.kubernetes.io/instance: basic-api
+    app.kubernetes.io/name: basic-api
+    app.kubernetes.io/part-of: basic-api
+    app.openshift.io/runtime-version: latest
+  name: basic-api
+spec:
+  port:
+    targetPort: 8000-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: basic-api
+    weight: 100
+  wildcardPolicy: None

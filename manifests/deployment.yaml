@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: basic-api
+    app.kubernetes.io/component: basic-api
+    app.kubernetes.io/instance: basic-api
+    app.kubernetes.io/name: basic-api
+    app.kubernetes.io/part-of: petclinic-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-namespace: basic-api
+  name: basic-api
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: basic-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: basic-api
+        deploymentconfig: basic-api
+    spec:
+      containers:
+      - image: quay.io/pittar/basic-api:latest
+        imagePullPolicy: Always
+        name: basic-api
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
